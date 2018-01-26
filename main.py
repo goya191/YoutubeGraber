@@ -10,14 +10,19 @@ def do_grab(stream, output_folder):
 	stream must be OGG!
 	"""
 	video_title = stream.player_config_args.get('title')
-	out_file = video_title + ".ogg"
 	print("downloading {}".format(video_title))
 	# stream.player_config_args['length_seconds']
-	stream.download(output_path=output_folder, filename=out_file)
-
+	saved_file_path = output_folder + os.sep + stream.default_filename
+	if not os.path.exists(saved_file_path):
+		stream.download(output_path=output_folder)
+	else:
+		print("skipping: {} - file already exists!").format(stream.default_filename)
+		return
+	new_filename = os.path.splitext(saved_file_path)[0] + ".ogg"
+	os.rename(saved_file_path, new_filename)
+	print("saved file to: {}".format(new_filename))
 
 def grab(urls, output_folder):
-	print urls
 	for url in urls:
 		try:
 			yt_obj = YouTube(url)
