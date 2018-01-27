@@ -1,4 +1,4 @@
-# YoutubeGraber
-Grabs stuff off youtube and downlads it
+# YoutubeGrabber
+Grabs stuff off youtube and downloads it
 
 Created by Goya and Jack
